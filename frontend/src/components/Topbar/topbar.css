@@ -1,0 +1,139 @@
+.topbar_container {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  background-color: #24a0ed;
+  justify-content: space-around;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.left_container {
+  flex: 3;
+  font-size: 20px;
+  margin-left: 20px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.center_container {
+  flex: 5;
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  height: 30px;
+  border-radius: 20px;
+  width: 100%;
+
+}
+
+.search_icon {
+  font-size: 20px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.searchInput {
+  width: 70%!important;
+  border: 0;
+  margin-left: 10px;
+}
+
+.searchInput:focus {
+  outline: 0;
+}
+
+.searchcontainer {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.right_container {
+  flex: 5;
+  display: flex;
+  align-items: center;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+  color: #fff;
+  font-size: 15px;
+}
+
+.links p {
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+.right_icons{
+    width: 70%;
+    display: flex;
+    align-items: center;
+    margin-left: 100px;
+}
+
+.icons{
+    margin-left: 10px;
+    position: relative;
+}
+
+.icons_right{
+    font-size: 25px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.icons .icon_text{
+    position: absolute;
+    top: -5px;
+    font-size: 15px;
+    color: #fff;
+    background-color: red;
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left: 10px;
+}
+
+.right_icons img {
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    margin-left: 70px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.search_user{
+  position: absolute;
+  background-color: #fff;
+  width: 400px;
+  top: 50px;
+  left: 350px;
+  background-color: whitesmoke;
+  
+}
+
+.friend_profile{
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.friend_profile:hover{
+  background-color: #24a0ed;
+  color: #fff;
+}
+
+.search_user p{
+  margin: 10px;
+  width: 100%;
+}
+

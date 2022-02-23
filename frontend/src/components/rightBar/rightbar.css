@@ -1,0 +1,87 @@
+.rightbar_container{
+    flex: 3.5;
+    position: sticky;
+    top: 50px;
+    height: calc(100vh - 50px);
+    
+} 
+
+
+.rightbar_wrapper{
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0px;
+}
+
+.righbar_birthdaytitle{
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.birthday{
+    width: 70px;
+    height: 70px;
+}
+
+.celebration{
+    width:100% ;
+    padding: 5px 5px;
+}
+
+.celebration_img{
+    width: 100%;
+    border-radius: 10px;
+    height: 300px;
+    object-fit: cover;
+}
+
+.online_friends{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.online_title{
+    font-size: 15px;
+    font-weight: bold;
+    margin-left: 20px;
+}
+
+.online_show{
+    width: 70%;
+    margin: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    height: 150px;
+    overflow-y: scroll;
+}
+
+.friends_style{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 2px;
+    cursor: pointer;
+}
+
+.active{
+    position: absolute;
+    font-size: 12px!important;
+    left: 20px;
+}
+
+.friend_status{
+    position: relative;
+}
+
+.friend_img{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 20px;
+}
+

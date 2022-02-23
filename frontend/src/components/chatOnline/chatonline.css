@@ -1,0 +1,34 @@
+.online_friends{
+    width: 100%;
+    margin: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+}
+
+.online_friends_style{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 2px;
+    cursor: pointer;
+}
+
+.friend_online_status{
+    position: relative;
+}
+
+.friend_online_img{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 20px;
+}
+
+.active_icon{
+    position: absolute;
+    font-size: 12px!important;
+    left: 20px;
+}
