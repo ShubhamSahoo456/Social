@@ -44,7 +44,7 @@ const Post = ({data}) => {
           <div className="post_center">
             <p className="desc_post">{data?.desc}</p>
             <img
-              src={data?.img}
+              src={`data:image/jpg;base64,${data.img}`}
               className="post_center"
             />
           </div>

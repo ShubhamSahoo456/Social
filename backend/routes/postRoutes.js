@@ -1,4 +1,5 @@
 const express = require("express");
+const multer = require("multer")
 const {
   createPost,
   updatePost,
@@ -9,11 +10,29 @@ const {
   getPostsByUserId,
 } = require("../controller/postController");
 
+const upload = multer({
+  limits:{
+    fileSize:2000000
+  },
+  fileFilter (req, file, cb) {
+    if(!file.originalname.match(/\.(jpg|png)$/)){
+      console.log('reached')
+      return cb(new Error('file type must be jpg or png'))
+    }
+
+    cb(undefined ,true)
+  }
+})
+
 
 
 const router = express.Router();
 
-router.post("/createPost", createPost);
+router.post("/createPost",upload.single('upload'), createPost,(errors,req,res,next)=>{
+  if(errors){
+    res.json({error:errors.message})
+  }
+});
 
 router.put("/updatePost/:id", updatePost);
 

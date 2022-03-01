@@ -16,6 +16,7 @@ app.use(function (req, res, next) {
     res.set("Access-Control-Allow-Origin", "*");
     res.set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
     res.set("Access-Control-Allow-Headers", "Content-Type");
+    res.set("Access-Control-Allow-Headers", "userid");
     res.set("Access-Control-Allow-Credentials", true);
     next();
   });

@@ -29,9 +29,9 @@ const Feed = ({home, userProfile}) => {
     <>
       <div className="feed_container">
         <div className="feed_wrapper">
-          <Status home userProfile={userProfile}/>
+          <Status home userProfile={userProfile} fetchUserPosts={fetchUserPosts}/>
           {posts.map((ele,index)=>(
-              <Post key={ele._id} data={ele}/>
+              <Post key={ele._id} data={ele} />
           ))}
         </div>
       </div>

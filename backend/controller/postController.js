@@ -4,6 +4,9 @@ const { findOne } = require("../model/userSchema");
 
 const createPost = async (req, res) => {
   try {
+    req.body.img = req.file.buffer
+    req.body.userId = req.headers.userid
+    console.log(req.headers)
     const newPOst = new Post(req.body);
     const savePost = await newPOst.save();
     if (savePost) {
