@@ -13,27 +13,23 @@ import {
   useNavigate,
 } from "react-router-dom";
 import { useSelector } from "react-redux";
-import Topbar from "./components/Topbar/Topbar";
 
-const useAuth = async () => {
+
+const useAuth = () => {
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("social"));
   const {userInfo} = useSelector(state=>state.userLogin)
-  
-  useEffect(()=>{
-    console.log('reached')
-  
-    if (user) {
-      return user;
-    } else {
-      navigate("/login");
+    
+    if (userInfo || user) {
+      console.log(userInfo, user)
+      return userInfo;
     }
-  },[userInfo])
   
 };
 
 const Protected = () => {
-  const isAuth = useAuth();
+  const isAuth =  useAuth();
+  
   return <>{isAuth ? <Outlet /> : <Navigate to="/login"/>}</>;
 };
 
