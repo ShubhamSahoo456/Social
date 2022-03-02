@@ -64,7 +64,7 @@ box-shadow: 2px 6px 9px 0px rgba(0,0,0,0.09);
 
 .icon_share{
     margin-right: 5px;
-
+    cursor: pointer;
 }
 
 .share_btn{

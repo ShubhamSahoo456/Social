@@ -8,20 +8,22 @@ import { useSelector } from "react-redux";
 import { io } from "socket.io-client";
 import axios from "axios";
 
-const Messenger = () => {
+
+
+const Messenger = (props) => {
   const { userInfo } = useSelector((state) => state.userLogin);
+  const { friends } = useSelector((state)=> state.online)
   const [conversation, setConversation] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
   const [messages, setMessages] = useState([]);
   const [chatMessage, setChatMesasge] = useState("");
-  const [onlineUsers, setOnlineUsers] = useState([]);
   const [arrivalMessage, setArrivalMressage] = useState([]);
   const [senderProfilepic , setSenderProfilepic] = useState("")
   const [receiverProfilepic, setReceiverProfilepic] = useState("")
   const socket = useRef();
-
+  
   useEffect(() => {
-    socket.current = io("ws://localhost:8900");
+    socket.current = io("http://localhost:8900");
     socket.current.on("getmessages", (data) => {
       console.log(data);
       setArrivalMressage({
@@ -30,6 +32,7 @@ const Messenger = () => {
         createdAt: Date.now(),
       });
     });
+  
   }, []);
 
   useEffect(() => {
@@ -38,13 +41,6 @@ const Messenger = () => {
       setMessages((prev) => [...prev, arrivalMessage]);
   }, [arrivalMessage]);
 
-  useEffect(() => {
-    socket.current.emit("addUser", userInfo._id);
-    socket.current.on("getUsers", (users) => {
-      console.log(users);
-      setOnlineUsers(users);
-    });
-  }, [userInfo._id]);
 
   const getUserConversations = async (users) => {
     try {
@@ -130,7 +126,7 @@ const Messenger = () => {
   
   return (
     <>
-      <Topbar />
+      <Topbar onlineUsers={friends}/>
       <div className="message">
         <div className="chatMenu">
           <div className="chatMenu_wrapper">
@@ -180,7 +176,7 @@ const Messenger = () => {
         </div>
         <div className="chatOnline">
           <div className="chatOnline_wrapper">
-            {onlineUsers.map((ele) => (
+            {friends.map((ele) => (
               <>
                 {ele.userId !== userInfo._id && (
                   <ChatOnline key={ele} Online={ele} />

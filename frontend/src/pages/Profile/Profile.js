@@ -10,6 +10,7 @@ import axios from "axios";
 
 const Profile = () => {
   const {userInfo} = useSelector(state=>state.userLogin)
+  const {friends} = useSelector(state=>state.online)
   const [userProfile, setUserProfile] = useState({})
   const [followed, setFollowed] = useState(false)
   const id = useParams().id
@@ -65,7 +66,7 @@ const Profile = () => {
 
   return (
     <>
-      <Topbar />
+      <Topbar onlineUsers={friends}/>
       <div className="home_container">
         <Sidebar />
         <div className="profile_wrapper">

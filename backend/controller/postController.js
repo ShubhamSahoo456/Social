@@ -1,10 +1,12 @@
 const User = require("../model/userSchema");
 const Post = require("../model/postSchema");
 const { findOne } = require("../model/userSchema");
+const sharp = require('sharp');
 
 const createPost = async (req, res) => {
   try {
-    req.body.img = req.file.buffer
+    const buffer = await sharp(req.file.buffer).png().resize({width:500,height:500}).toBuffer()
+    req.body.img = buffer
     req.body.userId = req.headers.userid
     console.log(req.headers)
     const newPOst = new Post(req.body);

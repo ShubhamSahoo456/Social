@@ -6,10 +6,12 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./topbar.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Logout from "../logout/logout";
+import { onlineAction } from "../../actions/onlineAction";
 
-const Topbar = () => {
+const Topbar = ({onlineUsers}) => {
+  const dispatch = useDispatch()
   const { userInfo } = useSelector((state) => state.userLogin);
   const navigate = useNavigate()
   const [search, setSearch] = useState(false);
@@ -41,7 +43,9 @@ const Topbar = () => {
 
   useEffect(() => {
     getAllUserProfile();
-  }, []);
+    console.log(onlineUsers)
+    dispatch(onlineAction(onlineUsers))
+  }, [onlineUsers]);
   return (
     <>
       <div className="topbar_container">
@@ -87,7 +91,7 @@ const Topbar = () => {
               <PersonIcon className="icons_right" />
               <span className="icon_text">1</span>
             </div>
-            <Link to="/messenger"><div className="icons">
+            <Link to={{pathname:"/messenger"}}><div className="icons">
               <ChatIcon className="icons_right" />
               <span className="icon_text">1</span>
             </div></Link>

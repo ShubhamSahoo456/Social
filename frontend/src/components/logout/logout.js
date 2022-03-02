@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "./logout.css";
 
 
 const Logout = ({logoutContainer, setLogoutContainer}) =>{
     const navigate = useNavigate()
+
 
     const logoutUser = ()=>{
         setLogoutContainer(false)

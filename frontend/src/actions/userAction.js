@@ -5,6 +5,11 @@ import axios from 'axios';
 
 export const userLoginAction = (email,password,navigate) => async(dispatch) => {
     try{
+        const config = {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          };
         dispatch({type:USER_LOGIN_REQUEST})
         const {data} = await axios.post("http://localhost:8000/api/v1/login",{email,password})
         localStorage.setItem('social',JSON.stringify(data))

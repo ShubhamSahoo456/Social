@@ -13,6 +13,7 @@ import {
   useNavigate,
 } from "react-router-dom";
 import { useSelector } from "react-redux";
+import Topbar from "./components/Topbar/Topbar";
 
 const useAuth = async () => {
   const navigate = useNavigate();

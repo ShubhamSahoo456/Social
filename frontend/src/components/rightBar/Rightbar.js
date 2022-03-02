@@ -4,24 +4,25 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import "./rightbar.css";
 
-const Rightbar = ({ profile }) => {
+const Rightbar = ({ profile, onlineUsers }) => {
   const [onlineFriends, setOnlineFriends] = useState([]);
   const { userInfo } = useSelector((state) => state.userLogin);
 
-  const fetchUserfriends = async () => {
-    try {
-      const { data } = await axios.get(
-        `http://localhost:8000/api/v1/getUserFollowers/${userInfo._id}`
-      );
-      setOnlineFriends(data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  // const fetchUserfriends = async () => {
+  //   try {
+  //     const { data } = await axios.get(
+  //       `http://localhost:8000/api/v1/getUserFollowers/${userInfo._id}`
+  //     );
+  //     setOnlineFriends(data);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   useEffect(() => {
-    fetchUserfriends();
-  }, []);
+    //fetchUserfriends();
+    console.log('right',onlineUsers)
+  }, [onlineUsers]);
   return (
     <>
       <div className="rightbar_container">
@@ -46,8 +47,10 @@ const Rightbar = ({ profile }) => {
             <div className="online_title">
               <p>Online Friends</p>
             </div>
-            <div className="online_show">
-              {onlineFriends.map((ele) => (
+            {onlineUsers && <div className="online_show">
+              {onlineUsers.map((ele) => (
+                <>
+                {ele._id !== userInfo._id &&
                 <div className="friends_style" key={ele._id}>
                   <div className="friend_status">
                     <img
@@ -58,8 +61,9 @@ const Rightbar = ({ profile }) => {
                   </div>
                   <p className="friend_name">{ele.fullName}</p>
                 </div>
+                }</>
               ))}
-            </div>
+            </div>}
           </div>
         </div>
       </div>
