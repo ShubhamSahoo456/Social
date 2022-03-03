@@ -79,11 +79,17 @@ const Messenger = (props) => {
     const receiverId = currentChat.members.find(
       (member) => member !== userInfo._id
     );
-    socket.current.emit("sendmessage", {
-      senderId: userInfo._id,
-      receiverId,
-      text: chatMessage,
-    });
+    socket.current.emit(
+      "sendmessage",
+      {
+        senderId: userInfo._id,
+        receiverId,
+        text: chatMessage,
+      },
+      (message) => {
+        alert(message);
+      }
+    );
     try {
       const body = {
         conversationId: currentChat._id,
@@ -126,11 +132,17 @@ const Messenger = (props) => {
           console.log(data);
           setMessages((prev) => [...prev, data]);
           setChatMesasge("");
-          socket.current.emit("sendmessage", {
-            senderId: userInfo._id,
-            receiverId,
-            text: `https://google.com/maps?q=${position.coords.latitude},${position.coords.longitude}`,
-          });
+          socket.current.emit(
+            "sendmessage",
+            {
+              senderId: userInfo._id,
+              receiverId,
+              text: `https://google.com/maps?q=${position.coords.latitude},${position.coords.longitude}`,
+            },
+            (message) => {
+              alert(message);
+            }
+          );
         } catch (err) {
           console.log(err);
         }
