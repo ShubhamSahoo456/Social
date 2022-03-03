@@ -69,13 +69,14 @@ io.on("connection", (socket) => {
       removeUser(socket.id);
     });
 
-    socket.on("sendmessage", ({ senderId, receiverId, text }) => {
+    socket.on("sendmessage", ({ senderId, receiverId, text }, callback) => {
       const user = getUser(receiverId);
       console.log(text);
       io.to(user.socketId).emit("getmessages", {
         senderId,
         text,
       });
+      callback("message delivered");
     });
   });
 });
