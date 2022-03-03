@@ -103,6 +103,41 @@ const Messenger = (props) => {
     }
   };
 
+  const sendLocation = async (e) => {
+    e.preventDefault();
+
+    const location = navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        console.log(position);
+        const receiverId = currentChat.members.find(
+          (member) => member !== userInfo._id
+        );
+        try {
+          const body = {
+            conversationId: currentChat._id,
+            sender: userInfo._id,
+            text: `https://google.com/maps?q=${position.coords.latitude},${position.coords.longitude}`,
+          };
+          console.log(body);
+          const { data } = await axios.post(
+            "http://localhost:8000/api/v1/createMessage",
+            body
+          );
+          console.log(data);
+          setMessages((prev) => [...prev, data]);
+          setChatMesasge("");
+          socket.current.emit("sendmessage", {
+            senderId: userInfo._id,
+            receiverId,
+            text: `https://google.com/maps?q=${position.coords.latitude},${position.coords.longitude}`,
+          });
+        } catch (err) {
+          console.log(err);
+        }
+      }
+    );
+  };
+
   const profilePicture = async (e) => {
     setCurrentChat(e);
     console.log(e);
@@ -168,6 +203,13 @@ const Messenger = (props) => {
                     className="submitChat"
                   >
                     Send
+                  </button>
+                  <button
+                    type="submit"
+                    onClick={(e) => sendLocation(e)}
+                    className="submitlocation"
+                  >
+                    Send Location
                   </button>
                 </div>
               </>
