@@ -178,8 +178,8 @@ const Messenger = (props) => {
           <div className="chatOnline_wrapper">
             {friends.map((ele) => (
               <>
-                {ele.userId !== userInfo._id && (
-                  <ChatOnline key={ele} Online={ele} />
+                {ele._id !== userInfo._id && (
+                  <ChatOnline key={ele.userId} Online={ele} />
                 )}
               </>
             ))}
