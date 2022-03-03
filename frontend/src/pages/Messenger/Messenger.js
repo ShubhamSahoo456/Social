@@ -6,24 +6,23 @@ import ChatOnline from "../../components/chatOnline/ChatOnline";
 import "./messenger.css";
 import { useSelector } from "react-redux";
 import { io } from "socket.io-client";
+import Socket from "../../components/shared/socket";
 import axios from "axios";
-
-
 
 const Messenger = (props) => {
   const { userInfo } = useSelector((state) => state.userLogin);
-  const { friends } = useSelector((state)=> state.online)
+  const { friends } = useSelector((state) => state.online);
   const [conversation, setConversation] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
   const [messages, setMessages] = useState([]);
   const [chatMessage, setChatMesasge] = useState("");
   const [arrivalMessage, setArrivalMressage] = useState([]);
-  const [senderProfilepic , setSenderProfilepic] = useState("")
-  const [receiverProfilepic, setReceiverProfilepic] = useState("")
+  const [senderProfilepic, setSenderProfilepic] = useState("");
+  const [receiverProfilepic, setReceiverProfilepic] = useState("");
   const socket = useRef();
-  
+
   useEffect(() => {
-    socket.current = io("http://localhost:8900");
+    socket.current = Socket;
     socket.current.on("getmessages", (data) => {
       console.log(data);
       setArrivalMressage({
@@ -32,7 +31,6 @@ const Messenger = (props) => {
         createdAt: Date.now(),
       });
     });
-  
   }, []);
 
   useEffect(() => {
@@ -40,7 +38,6 @@ const Messenger = (props) => {
       currentChat?.members.includes(arrivalMessage.sender) &&
       setMessages((prev) => [...prev, arrivalMessage]);
   }, [arrivalMessage]);
-
 
   const getUserConversations = async (users) => {
     try {
@@ -106,27 +103,28 @@ const Messenger = (props) => {
     }
   };
 
-  const profilePicture = async(e) => {
-    setCurrentChat(e)
-    console.log(e)
-    try{
-        e.members.map(async(ele)=>{
-            const {data} = await axios.get(`http://localhost:8000/api/v1/getUser/${ele}`)
-            if(ele !== userInfo._id){
-                setReceiverProfilepic(data.profilePicture)
-            }else{
-                setSenderProfilepic(data.profilePicture)
-            }
-        })
-    }catch(err){
-        console.log(err)
+  const profilePicture = async (e) => {
+    setCurrentChat(e);
+    console.log(e);
+    try {
+      e.members.map(async (ele) => {
+        const { data } = await axios.get(
+          `http://localhost:8000/api/v1/getUser/${ele}`
+        );
+        if (ele !== userInfo._id) {
+          setReceiverProfilepic(data.profilePicture);
+        } else {
+          setSenderProfilepic(data.profilePicture);
+        }
+      });
+    } catch (err) {
+      console.log(err);
     }
-  }
+  };
 
-  
   return (
     <>
-      <Topbar onlineUsers={friends}/>
+      <Topbar onlineUsers={friends} />
       <div className="message">
         <div className="chatMenu">
           <div className="chatMenu_wrapper">
@@ -136,7 +134,7 @@ const Messenger = (props) => {
               className="search_input"
             />
             {conversation.map((e) => (
-              <div key={e._id} onClick={() =>profilePicture(e)}>
+              <div key={e._id} onClick={() => profilePicture(e)}>
                 <Conversation conversation={e} />
               </div>
             ))}
@@ -148,7 +146,13 @@ const Messenger = (props) => {
               <>
                 <div className="chatBox_wrapper_top">
                   {messages.map((ele) => (
-                    <Message senderProfilepic={senderProfilepic} receiverProfilepic={receiverProfilepic} own={ele.sender != userInfo._id} Chat={ele} />
+                    <Message
+                      key={ele._id}
+                      senderProfilepic={senderProfilepic}
+                      receiverProfilepic={receiverProfilepic}
+                      own={ele.sender != userInfo._id}
+                      Chat={ele}
+                    />
                   ))}
                 </div>
                 <div className="chatBox_wrapper_bottom">
@@ -179,7 +183,7 @@ const Messenger = (props) => {
             {friends.map((ele) => (
               <>
                 {ele._id !== userInfo._id && (
-                  <ChatOnline key={ele.userId} Online={ele} />
+                  <ChatOnline key={ele._id} Online={ele} />
                 )}
               </>
             ))}
