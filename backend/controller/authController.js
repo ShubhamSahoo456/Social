@@ -2,7 +2,6 @@ const User = require("../model/userSchema");
 
 const registerUser = async (req, res) => {
   try {
-    console.log(req.body);
     const newUser = new User(req.body);
     const userData = await newUser.save();
     if (userData) {
@@ -15,7 +14,6 @@ const registerUser = async (req, res) => {
 
 const loginUser = async (req, res) => {
   try {
-    console.log(req.body);
     const { email, password } = req.body;
     const findEmail = await User.findOne({ email: email });
     if (findEmail) {
