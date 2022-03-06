@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --watch",
+    "dev": "./config.env nodemon index.js",
     "start": "nodemon index.js"
   },
   "author": "shubham",
@@ -23,6 +24,8 @@
     "socket.io": "^4.4.1"
   },
   "devDependencies": {
-    "jest": "^27.5.1"
+    "jest": "^27.5.1",
+    "nodemon": "^2.0.15",
+    "supertest": "^6.2.2"
   }
 }

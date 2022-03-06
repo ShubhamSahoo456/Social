@@ -84,3 +84,5 @@ io.on("connection", (socket) => {
 server.listen(process.env.PORT, () => {
   console.log(process.env.PORT + " is running");
 });
+
+module.exports = server;
